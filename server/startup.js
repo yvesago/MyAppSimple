@@ -45,6 +45,5 @@ Meteor.startup(function () {
 
  // set mail server 
  process.env.MAIL_URL = Meteor.settings.mail.smtp;
- process.env.ROOT_URL="http://agostini.univ-metz.fr:8001";
 
 });
