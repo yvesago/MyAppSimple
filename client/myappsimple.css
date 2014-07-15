@@ -1,0 +1,17 @@
+.table {
+    font-size: 12px
+}
+
+
+table { table-layout: fixed; }
+
+table td { word-wrap: break-word; }
+
+/*
+ resume table content
+*/
+table td.filtre,
+table td.content {
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;}

@@ -1,0 +1,266 @@
+<!-- 
+
+//  Start page
+
+-->
+<template name="start">
+  {{> header}}
+
+ <div class="edit">
+ <!-- show and edit content field for "Meteor.settings.public.appName" -->
+ {{#with Message n=appName}}
+  {{#markdown}}{{content}}{{/markdown}}
+  {{#if isInRole 'admin'}}
+   <span data-toggle="modal" href="#updateAppForm" class="glyphicon glyphicon-pencil clickable docEdit"></span>
+   <span class="help-block">Admin : {{i18n "helpInlineEdit" appName }}</span>
+  {{/if}}
+ {{/with}}
+ </div>
+ 
+ <div class="container">
+ {{> reactiveTable collection=tables settings=settings}}
+ </div>
+
+ {{> insertAppForm }}
+
+ {{> updateAppForm }}
+</template>
+
+<!--
+
+// Admin page to manage roles
+
+-->
+<template name="admin">
+  {{> header}}
+
+  <h3>Manage users and roles</h3>
+   <div class="container">
+    {{> accountsAdmin}}
+   </div>
+</template>
+
+<!-- 
+
+// signin page
+
+  -->
+<template name="signin">
+ <div class="jumbotron">
+  <h1>Bienvenue</h1>
+  <p>Pour accéder à cette application vous devez être identifié</p>
+  <p>
+   <a class="btn btn-primary login-btn" role="button">Se connecter</a> 
+  </p>
+ </div>
+ Local user (insecure clear text!) :  {{> loginButtons}} 
+</template>
+
+
+<!-- // various // -->
+
+<template name="loading">
+  <h1><i class="fa fa-spinner fa-spin"></i>  Loading...</h1>
+</template>
+
+<template name="not_found">
+  <h3>404 - Not found</h3>
+</template>
+
+<template name="invalid-access">
+  <h3>403 Forbidden - Invalid Access</h3>
+</template>
+
+<template name="header">
+ <div class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/"><i class="fa fa-spinner"></i> {{appName}}</a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+            {{#if isInRole 'admin'}}
+            <li><a href="/admin">Admin</a></li>
+            {{/if}}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       {{> loginButtons }} 
+    </ul>
+  </div>
+ </div>
+</template>
+
+<!-- // for reactive table cell //  -->
+<template name="desciptionTmpl">
+ {{content}} 
+</template>
+
+<!-- 
+<template name="filtresTmpl">
+ <span class="filtre">
+ {{#markdown}}{{filtre}}{{/markdown}} 
+ </span>
+</template>
+  -->
+
+<!-- ///  -->
+<template name="actionTmpl">
+ <small>
+  <abbr title="{{dateFormat created format="llll"}} by {{createdBy}}" class="initialism">Créé</abbr> <br />
+  <abbr title="{{dateFormat modified format="llll"}} by {{modifiedBy}}" class="initialism">Modifié</abbr> 
+ </small>
+ <br />
+  {{> button}}
+</template>
+
+<!-- ///  -->
+<template name="button">
+ {{#if isInRole 'admin'}}
+  <span href="#deletemessage" class="glyphicon glyphicon-trash clickable docClear"></span>   
+ {{/if}}
+  <span data-toggle="modal" href="#updateAppForm" class="glyphicon glyphicon-pencil clickable docEdit"></span>
+  <span href="#infoApp" class="glyphicon glyphicon-info-sign clickable docInfo"></span>
+</template>
+
+<!-- 
+
+// Page appInfo
+
+-->
+<template name="appInfo">
+   {{> header}}
+   <div class="container" id="appInfo" >
+     <h2> {{nom}} - {{statushtml}} </h2>
+
+     <a href="#updateAppForm" data-toggle="modal" class="btn btn-default btn-primary clickable docEdit"><span class="glyphicon glyphicon-pencil"></span> Update Request </a>
+
+{{#markdown}}
+
+### Description
+
+{{content}}
+
+**Domaine :** {{domaine}}  
+**Usage Ldap:** {{usage}}  
+**IPs sources:** {{ips}}  
+**Data perso:** {{dataperso}}
+
+### Compte et serveurs
+
+Vous pouvez utiliser le compte : ` {{ compte }} `  
+sur les serveurs : ` {{ serveurs }} `  
+
+### Filtres
+```
+ {{ filtre }}
+```
+
+### Contacts
+
+[{{ owner }}](mailto:{{ owner }})
+
+**Créé le :** {{dateFormat created format="LLLL"}}  **par** <{{createdBy}}>  
+**Dernière modification le :** {{dateFormat modified format="LLLL"}}  **par** <{{modifiedBy}}>
+
+### {{i18n "History"}}
+
+hors gestion perso : nom, description, filtres, domaine, contacts
+
+```
+{{#each updatesHistory.reverse}}
+ {{dateFormat date}} [{{by}}] {{content}}
+{{/each}}
+```
+
+{{/markdown}}
+   </div>
+ {{> updateAppForm }}
+</template>
+
+<!-- 
+
+// Insert Form
+
+-->
+<template name="insertAppForm">
+  <h3>{{i18n "NewRequest"}}</h3>
+  <br />
+   <div class="container">
+   <div class="pull-right">
+    <div class="panel panel-info">
+    <div class="panel-heading">
+     {{i18n "FormFields"}}
+    </div>
+    <div class="panel-body">
+     <strong>*</strong> Champs obligatoire, <br />
+     <strong>+</strong> Nécessaire au choix des serveurs, <br />
+     <strong>autres</strong> disponibles pour votre gestion personnelle 
+    </div>
+   </div>
+   </div>
+   <div>
+    {{> quickForm collection="Apps" template="bootstrap3-horizontal" label-class="col-sm-1" input-col-class="col-sm-5" 
+     omitFields="owner,created,modified,status,compte,serveurs,createdBy,modifiedBy,updatesHistory,_chgips"
+     id="insertAppForm" type="insert"}} 
+     </div>
+     </div>
+    <br />
+</template>
+
+<!-- 
+
+// Update Modal Form
+
+-->
+<template name="updateAppForm">
+<div class="modal fade" id="updateAppForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body" >
+  <p>
+   <a class="close" data-dismiss="modal">×</a>
+  </p>
+  {{#if testField "content"}}
+   <span class="help-block">Vous pouvez rédiger en Markdown</span>
+  {{/if}}
+
+{{#if docFields}} <!-- single field editing -->
+ {{#autoForm collection="Apps" validation="keyup" id="docForm" fields=docFields doc=selectedDoc 
+  type="update"  }}  
+  <!-- hidden fields for mandatory or strict validate fields -->
+  {{#unless testField "nom" }}
+    {{> afFieldInput name="nom" type="hidden"}}
+   {{/unless}}
+  {{#unless testField "ips" }}
+   <!-- missing type hidden for array field -->
+   <div style="display: none">
+     {{> afArrayField name="ips" }}
+   </div>
+  {{/unless}} 
+  <div> 
+  <br />
+   {{> afQuickField name=docFields template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-7"}} 
+  </div>
+  <p class='text-left'>
+   <button type="submit" class="btn btn-primary">Update</button>
+  </p>
+ {{/autoForm}}
+{{else}} <!--  full form update -->
+ {{#if isInRole 'admin'}}
+  {{> quickForm collection="Apps" validation="keyup" id="docForm" fields=docFields doc=selectedDoc 
+     omitFields="created,modified,createdBy,modifiedBy,updatesHistory,_chgips"
+  template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-7" 
+  type="update"  }}  
+ {{else}} <!-- don't show serveurs or compte fields for non admin -->
+  {{> quickForm collection="Apps" validation="keyup" id="docForm" fields=docFields doc=selectedDoc 
+     omitFields="created,modified,createdBy,modifiedBy,updatesHistory,_chgips,serveurs,compte" 
+  template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-7" 
+  type="update"  }}  
+ {{/if}}
+{{/if}}
+  <a href="#" class="btn btn-info" data-dismiss="modal">Close</a>
+   </div>
+  </div>
+ </div>
+</div>
+</template>
+

@@ -1,0 +1,50 @@
+{
+    "environment": "test", 
+    "appAdmin": "agostini5",
+    "public": {
+        "appName": "LdapAccess",
+        "lang": "fr",
+        "cas": {
+            "loginUrl": "https://auth.univ-lorraine.fr/login",
+            "serviceParam": "service",
+            "popupWidth": 810,
+            "popupHeight": 610
+        }
+    },
+    "mail": {
+      "smtp": "smtp://smtp.univ-metz.fr:25",
+      "from": "<noreply@univ-lorraine.fr> LdapAccess (ne pas répondre)",
+      "liste": "yves.agostini@univ-lorraine.fr"
+    },
+    "default": {
+        "users": [
+            {"name":"Normal User", "email":"normal@a.fr", "roles":[]},
+            {"name":"View-Secrets User", "email":"view@a.fr", "roles":["view-secrets"]},
+            {"name":"Manage-Users User", "email":"manage@a.fr", "roles":["manage-users"]},
+            {"name":"Admin User", "email":"admin@a.fr", "roles":["admin"]}
+            ],
+        "password": "a"
+    },
+    "cas": {
+        "baseUrl": "https://auth.univ-lorraine.fr/",
+        "autoClose": true
+    },
+    "ldap": {
+        "url": "ldap://ldaptest.univ-lorraine.fr",
+        "base": "ou=people,dc=univ-lorraine,dc=fr",
+        "timeout": 10000,
+        "bindDn": "",
+        "bindSecret": "",
+        "filter": "(&(uid=%uid)(objectClass=inetOrgPerson))",
+        "scope": "one",
+        "nameAttribute": "displayName",
+        "mailAttribute": "mail",
+        "forceUsername": true,
+        "throwError": true,
+        "skipBindError": true,
+        "supportedServices": [
+            "cas"
+        ]
+    }
+}
+

@@ -1,0 +1,48 @@
+{
+    "environment": "dev", 
+    "appAdmin": "login1",
+    "public": {
+        "appName": "MyApp",
+        "lang": "en",
+        "cas": {
+            "loginUrl": "https://auth.univ.org/login",
+            "serviceParam": "service",
+            "popupWidth": 810,
+            "popupHeight": 610
+        }
+    },
+    "mail": {
+      "smtp": "smtp://smtp.univ.org:25",
+      "from": "<noreply@univ.org> MyApp (ne pas répondre)",
+    },
+    "default": {
+        "users": [
+            {"name":"Normal User", "email":"normal@a.org", "roles":[]},
+            {"name":"View-Secrets User", "email":"view@a.org", "roles":["view-secrets"]},
+            {"name":"Admin User", "email":"admin@a.org", "roles":["admin"]}
+            ],
+        "password": "xxxxx"
+    },
+    "cas": {
+        "baseUrl": "https://auth.univ.org/",
+        "autoClose": true
+    },
+    "ldap": {
+        "url": "ldap://ldap.univ.org",
+        "base": "ou=people,dc=univ,dc=org",
+        "timeout": 10000,
+        "bindDn": "",
+        "bindSecret": "",
+        "filter": "(&(uid=%uid)(objectClass=inetOrgPerson))",
+        "scope": "one",
+        "nameAttribute": "displayName",
+        "mailAttribute": "mail",
+        "forceUsername": true,
+        "throwError": true,
+        "skipBindError": true,
+        "supportedServices": [
+            "cas"
+        ]
+    }
+}
+
