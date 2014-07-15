@@ -96,7 +96,7 @@ To create a mixed authentication between local login/password and remote Jasig C
 
 CAS needs to use the real server URL. You need to set ROOT_URL on meteor startup : 
 ```
-ROOT_URL="http://myappserver.univ.org:3000" mrt --production --settings server/Meteor.settings
+ROOT_URL="http://myappserver.univ.org:3000" mrt --settings server/Meteor.settings
 ```
 
 `router.js` is used to request authentication.
