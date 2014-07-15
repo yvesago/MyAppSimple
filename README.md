@@ -11,6 +11,8 @@ The field `status` is shared between admins and users.
 Install Meteor in debian wheezy with backports (07/2014)
 
 ```
+$ apt-get install build-essential
+
 $ apt-get install nodejs mongodb-server
 $ ln -s /usr/bin/nodejs /usr/bin/node
 $ curl https://www.npmjs.org/install.sh | sh
@@ -19,9 +21,46 @@ $ curl https://www.npmjs.org/install.sh | sh
 $ curl https://install.meteor.com/ | sh
 # install meteorite package manager
 $ npm install -g meteorite
-
-
 ```
+
+Get this code
+```
+git clone https://github.com/yvesago/MyAppSimple.git
+cd MyAppSimple/
+```
+
+
+Add packages:
+```
+mrt add collection2
+mrt add autoform
+mrt add collection-hooks
+mrt add iron-router
+
+mrt add accounts-password
+mrt add roles
+mrt add accounts-admin-ui-bootstrap-3
+mrt add accounts-ui-bootstrap-3
+
+mrt add accounts-cas
+mrt add accounts-ldap-profile
+
+mrt add reactive-table
+mrt add font-awesome
+mrt add showdown
+mrt add email
+
+mrt add just-i18n
+mrt add moment-with-langs
+```
+
+tests:
+```
+cd tests/
+mrt test-packages ./  --settings Meteor.settings.test
+```
+
+Watch results in <http://localhost:3000>
 
 
 ## Settings
