@@ -2,6 +2,5 @@
 *.*~
 server/Meteor.settings
 .build/
-.meteor/
 packages/
 start.sh
