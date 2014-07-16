@@ -142,6 +142,36 @@ You will find some samples to use text translation for various languages with `j
 
 `showdown` allows to use Markdown in templates or write a full page as in appInfo.
 
+# Deployment
+
+There is a lot of documentation to deploy a Meteor app with nginx or apache config, scripts to package and deploy, `forever` config for nodejs app but I don't find any sample to deploy a Meteor application on Debian with a minimal setting.
+
+You will find in `server/debian-start.sh` a simple `start-stop-daemon` with logs send in `/var/log/messages`. Feel free to custom this script with deploy or forever commands.
+
+Meteor applications will be stored in `/var/www/$NAME`, configs in `/etc/meteor/`.
+
+On client side
+```
+mrt bundle myappsimple.tar.gz
+
+scp myappsimple.tar.gz root@myappserver:/var/www/myappsimple
+scp server/debian-start.sh root@myappserver:/etc/init.d/myappsimple
+scp server/Meteor.settings root@myappserver:/etc/meteor/Meteor.myappsimple.settings
+```
+
+On server side
+```
+cd /var/www/myappsimple
+
+tar zxvf myappsimple.tar.gz
+
+vi /etc/init.d/myappsimple
+# fix ROOT_URL, METEOR_URL, ...
+
+/etc/init.d/myappsimple start
+
+update-rc.d myappsimple defaults
+```
 
 
 # AUTHORS
