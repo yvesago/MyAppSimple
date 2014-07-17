@@ -9,7 +9,9 @@
  <div class="edit">
  <!-- show and edit content field for "Meteor.settings.public.appName" -->
  {{#with Message n=appName}}
+ <div class="bs-callout bs-callout-warning">
   {{#markdown}}{{content}}{{/markdown}}
+ </div>
   {{#if isInRole 'admin'}}
    <span data-toggle="modal" href="#updateAppForm" class="glyphicon glyphicon-pencil clickable docEdit"></span>
    <span class="help-block">Admin : {{i18n "helpInlineEdit" appName }}</span>
@@ -182,9 +184,19 @@ hors gestion perso : nom, description, filtres, domaine, contacts
 
 -->
 <template name="insertAppForm">
-  <h3>{{i18n "NewRequest"}}</h3>
+ <div class="container">
+ <div class="col-md-8">
+      <h3>{{i18n "NewRequest"}}</h3>
   <br />
-   <div class="container">
+    {{> quickForm collection="Apps" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-7" 
+     omitFields="owner,created,modified,status,compte,serveurs,createdBy,modifiedBy,updatesHistory,_chgips"
+     id="insertAppForm" type="insert"}} 
+  </div>
+<div class="col-md-4">
+<br />
+<br />
+<br />
+<br />
    <div class="pull-right">
     <div class="panel panel-info">
     <div class="panel-heading">
@@ -195,14 +207,11 @@ hors gestion perso : nom, description, filtres, domaine, contacts
      <strong>+</strong> Nécessaire au choix des serveurs, <br />
      <strong>autres</strong> disponibles pour votre gestion personnelle 
     </div>
+    </div>
    </div>
-   </div>
-   <div>
-    {{> quickForm collection="Apps" template="bootstrap3-horizontal" label-class="col-sm-1" input-col-class="col-sm-5" 
-     omitFields="owner,created,modified,status,compte,serveurs,createdBy,modifiedBy,updatesHistory,_chgips"
-     id="insertAppForm" type="insert"}} 
-     </div>
-     </div>
+ </div>
+ </div>
+
     <br />
 </template>
 
