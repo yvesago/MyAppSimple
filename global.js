@@ -12,5 +12,5 @@ Accounts.config({
 // Set lang for i18n and date time moment library
 
 i18n.setLanguage(Meteor.settings.public.lang);
-moment.lang(Meteor.settings.public.lang);
+moment.locale(Meteor.settings.public.lang);
 i18n.showMissing('[no translation for "<%= label %>" in <%= language %>]');

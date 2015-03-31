@@ -144,7 +144,7 @@ Schemas.app = new SimpleSchema({
          optional: true,
          minCount: 1,
          min: 4,
-         regEx: SchemaRegEx.Email,
+         regEx: SimpleSchema.RegEx.Email,
          autoValue: function () {
            if (this.isInsert) {
             if (!this.operator) {

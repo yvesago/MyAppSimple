@@ -34,11 +34,13 @@ Template._loginButtonsLoggedInDropdownActions.allowChangingPassword = function()
 /*
  Hooks
 */
-
+// TODO to fix for new autoform
 AutoForm.addHooks(null, {
-        onSubmit: function () {
+        onSuccess: function () {
         //  close modal form on submit;
           $('#updateAppForm').modal('hide');
+          this.done();
+          //return false;
         }
 }); 
 
@@ -92,14 +94,16 @@ UI.registerHelper('dateFormat', function(context, block) {
 
 /* 
 Helpers for start page
-*/
+
 
 Template.start.tables = function () {
         return Apps.find();
-}
+}*/
 
 // reactive table settings
 Template.start.helpers({
+    tables : function () {
+       return Apps.find();},
     settings: function () {
         return {
             rowsPerPage: 10,
@@ -203,21 +207,19 @@ Template.start.events ({
 
 // Helpers for update modal form
 
-Template.updateAppForm.selectedDoc = function(t) {
+Template.updateAppForm.helpers({
+selectedDoc: function(t) {
     return Apps.findOne(Session.get("selectedDoc"));
-};
-
-
-Template.updateAppForm.docFields = function(t) {
+},
+docFields: function(t) {
     var field = Session.get("selectedOp");
     return (field !== 'full') ? field : '';
-};
-
-
-Template.updateAppForm.testField = function(t) {
+},
+testField: function(t) {
     var field = Session.get("selectedOp");
     return (t === field);
-};
+}
+});
 
 // Helpers for appinfo
 

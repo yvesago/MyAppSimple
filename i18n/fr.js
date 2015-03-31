@@ -11,5 +11,7 @@ i18n.map('fr', {
   'AppName': "Nom de l'application",
   'SelectOneLabel': "(Choisir ...)",
   'NewRequest': "Nouvelle demande",
-  'FormFields': "Champs du formulaire"
+  'FormFields': "Champs du formulaire",
+  'Submit': "Enregistrer",
+  'reactiveTable.filter': "Filtrer"
 });

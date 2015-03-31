@@ -4,20 +4,19 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-collection2
-autoform
-bootstrap-3
-iron-router
-roles
-accounts-admin-ui-bootstrap-3
-reactive-table
-just-i18n
-font-awesome
+aldeed:collection2
+ian:bootstrap-3
+iron:router
+alanning:roles
+mrt:accounts-admin-ui-bootstrap-3
+kasoki:reactive-table
+natestrauser:font-awesome
 showdown
-collection-hooks
-accounts-ldap-profile
-accounts-cas
+matb33:collection-hooks
+atoy40:accounts-cas
 accounts-password
-accounts-ui-bootstrap-3
+ian:accounts-ui-bootstrap-3
 email
-moment-with-langs
+jeeeyul:moment-with-langs
+aldeed:autoform
+anti:i18n

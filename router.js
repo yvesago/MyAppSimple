@@ -14,15 +14,17 @@ var filters = {
     Meteor.subscribe('users');
     if (Meteor.loggingIn()) {
       this.render('loading');
-    } else {
+    } 
+    else {
       user = Meteor.user();
-      if (!user) {
+      if (user) { 
+       this.next(); 
+       }
+       else {
         console.log('filter: signin');
         this.render('signin');
-          pause();
-        return;
-       };
-   }
+        };
+   };
  }, 
  // force CAS auth
  forcecas: function (pause) {
@@ -33,6 +35,7 @@ var filters = {
  wait: function () {
       this.render('loading');
       this.subscribe('apps').wait();
+      this.next();
  }
 };
 
@@ -43,7 +46,6 @@ Router.configure({
   notFoundTemplate: 'not_found',
 });
 
-Router.onBeforeAction('loading');
 
 Router.map(function () {
   this.route('start', {

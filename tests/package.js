@@ -8,17 +8,17 @@ Package.on_test(function (api) {
      var both = ['server','client'];
 
 api.use([
-    "collection-hooks",
+    "matb33:collection-hooks",
     "underscore",
     "accounts-base",
     "accounts-password",
-    'simple-schema',
-    'iron-router',
-    'roles',
+    'aldeed:simple-schema',
+    'iron:router',
+    'alanning:roles@1.2.13',
     "tinytest",
-    'autoform',
-    'just-i18n',
-    'collection2',
+    'aldeed:autoform',
+    'mrt:just-i18n',
+    'aldeed:collection2',
     "test-helpers"
   ], both);
 
