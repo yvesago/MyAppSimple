@@ -19,8 +19,6 @@ $ curl https://www.npmjs.org/install.sh | sh
 
 # install Meteor
 $ curl https://install.meteor.com/ | sh
-# install meteorite package manager
-$ npm install -g meteorite
 ```
 
 Get this code
@@ -32,32 +30,31 @@ cd MyAppSimple/
 
 Add packages:
 ```
-mrt add collection2
-mrt add autoform
-mrt add collection-hooks
-mrt add iron-router
+meteor add aldeed:collection2
+meteor add aldeed:autoform
+meteor add matb33:collection-hooks
+meteor add iron:router
 
-mrt add accounts-password
-mrt add roles
-mrt add accounts-admin-ui-bootstrap-3
-mrt add accounts-ui-bootstrap-3
+meteor add accounts-password
+meteor add alanning:roles
+meteor add mrt:accounts-admin-ui-bootstrap-3
+meteor add ian:accounts-ui-bootstrap-3
 
-mrt add accounts-cas
-mrt add accounts-ldap-profile
+meteor add atoy40:accounts-cas
+meteor add atoy40:accounts-ldap-profile
 
-mrt add reactive-table
-mrt add font-awesome
-mrt add showdown
-mrt add email
+meteor add kasoki:reactive-table
+meteor add natestrauser:font-awesome
+meteor add showdown
+meteor add email
 
-mrt add just-i18n
-mrt add moment-with-langs
+meteor add anti:i18n
+meteor add jeeeyul:moment-with-langs
 ```
 
 tests:
 ```
-cd tests/
-mrt test-packages ./  --settings Meteor.settings.test
+meteor test-packages tests/  --settings tests/Meteor.settings.test
 ```
 
 Watch results in <http://localhost:3000>
@@ -96,7 +93,7 @@ To create a mixed authentication between local login/password and remote Jasig C
 
 CAS needs to use the real server URL. You need to set ROOT_URL on meteor startup : 
 ```
-ROOT_URL="http://myappserver.univ.org:3000" mrt --settings server/Meteor.settings
+ROOT_URL="http://myappserver.univ.org:3000" meteor --settings server/Meteor.settings
 ```
 
 `router.js` is used to request authentication.
@@ -108,13 +105,11 @@ Even most of Meteor and Meteor packages use **TinyTest**, there's a real lack of
 In `tests/` directory you will find a simple `tests.js` with some tests to validate data access by roles.
 
 ```
-cd tests
-mrt test-packages ./  --settings Meteor.settings.test
+meteor test-packages tests/  --settings tests/Meteor.settings.test
 ```
 
 You will watch results on <http://localhost:3000>
 
-_It seems that the use of meteorite does not allow to mix `packages.js` and links in `packages/`_
 
 `insecure_login.js` allows switching between few users profiles. Apps collection is flushed before any admin connexion.
 
@@ -138,7 +133,7 @@ Form fields are defined with `collection2` in `model.js`. You will find some sam
 
 ### Various
 
-You will find some samples to use text translation for various languages with `just-i18n` in templates, helpers or model. Moreover the use of `moment-with-langs` allows to write dates and time in local language. 
+You will find some samples to use text translation for various languages with `anti:i18n` in templates, helpers or model. Moreover the use of `moment-with-langs` allows to write dates and time in local language. 
 
 `showdown` allows to use Markdown in templates or write a full page as in appInfo.
 
@@ -152,7 +147,7 @@ Meteor applications will be stored in `/var/www/$NAME`, configs in `/etc/meteor/
 
 On client side
 ```
-mrt bundle myappsimple.tar.gz
+meteor bundle myappsimple.tar.gz
 
 scp myappsimple.tar.gz root@myappserver:/var/www/myappsimple
 scp server/debian-start.sh root@myappserver:/etc/init.d/myappsimple
@@ -182,6 +177,6 @@ Yves Agostini, `<yvesago@cpan.org>`
 
 License : MIT
 
-Copyright 2014 - Yves Agostini 
+Copyright 2015 - Yves Agostini
 
 

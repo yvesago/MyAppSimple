@@ -13,11 +13,11 @@ api.use([
     "accounts-base",
     "accounts-password",
     'aldeed:simple-schema',
-    'iron:router',
+    'iron:router@1.0.7',
     'alanning:roles@1.2.13',
     "tinytest",
-    'aldeed:autoform',
-    'mrt:just-i18n',
+    'aldeed:autoform@4.2.2',
+    'anti:i18n',
     'aldeed:collection2',
     "test-helpers"
   ], both);
