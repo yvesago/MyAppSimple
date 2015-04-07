@@ -9,7 +9,7 @@ atoy40:accounts-cas@0.0.2
 autoupdate@1.2.1
 base64@1.0.3
 binary-heap@1.0.3
-blaze@2.1.1
+blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 callback-hook@1.0.3
@@ -23,7 +23,7 @@ geojson-utils@1.0.3
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
-ian:accounts-ui-bootstrap-3@1.2.38
+ian:accounts-ui-bootstrap-3@1.2.39
 ian:bootstrap-3@3.3.1
 id-map@1.0.3
 iron:controller@1.0.7
