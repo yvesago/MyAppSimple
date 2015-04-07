@@ -13,5 +13,9 @@ i18n.map('fr', {
   'NewRequest': "Nouvelle demande",
   'FormFields': "Champs du formulaire",
   'Submit': "Enregistrer",
-  'reactiveTable.filter': "Filtrer"
+  'reactiveTable.filter': "Filtre",
+  'reactiveTable.show': "Voir",
+  'reactiveTable.rowsPerPage': "lignes par page",
+  'reactiveTable.page': "page",
+  'reactiveTable.of': "sur"
 });

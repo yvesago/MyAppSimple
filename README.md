@@ -147,9 +147,9 @@ Meteor applications will be stored in `/var/www/$NAME`, configs in `/etc/meteor/
 
 On client side
 ```
-meteor bundle myappsimple.tar.gz
+meteor build ../myappsimpleBundle --architecture os.linux.x86_32
 
-scp myappsimple.tar.gz root@myappserver:/var/www/myappsimple
+scp ../myappsimpleBundle/myappsimple.tar.gz root@myappserver:/var/www/myappsimple
 scp server/debian-start.sh root@myappserver:/etc/init.d/myappsimple
 scp server/Meteor.settings root@myappserver:/etc/meteor/Meteor.myappsimple.settings
 ```
